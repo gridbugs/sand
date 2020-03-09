@@ -103,6 +103,5 @@ async fn main() {
         _ = print_intervals(duration, interval) => {}
         _ = tokio::time::delay_for(duration) => {}
     }
-    print_remaining(Duration::from_secs(0));
-    println!("");
+    print!("\r");
 }
