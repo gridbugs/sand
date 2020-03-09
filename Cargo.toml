@@ -1,0 +1,15 @@
+[package]
+name = "sand"
+description = "Minimal countdown timer, similar to the sleep command, but constantly prints the time remaining (in place)"
+version = "0.1.0"
+authors = ["Stephen Sherratt <stephen@sherra.tt>"]
+edition = "2018"
+readme = "README.md"
+homepage = "https://github.com/stevebob/sand"
+repository = "https://github.com/stevebob/sand"
+
+[dependencies]
+tokio = { version = "0.2", features = ["macros", "time"] }
+simon = "0.3"
+parse_duration = "2.1"
+chrono = "0.4"
