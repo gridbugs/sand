@@ -34,8 +34,9 @@ impl Args {
     }
 }
 
-fn print_remaining(stdout: &mut std::io::Stdout, remaining: Duration) {
+fn print_remaining(remaining: Duration) {
     use std::io::Write;
+    let mut stdout = std::io::stdout();
     let remaining = chrono::Duration::from_std(remaining).unwrap();
     let weeks = remaining.num_weeks();
     let days = remaining.num_days() % 7;
@@ -81,18 +82,17 @@ fn print_remaining(stdout: &mut std::io::Stdout, remaining: Duration) {
 }
 
 async fn print_intervals(total_duration: Duration, interval_duration: Duration) {
-    let mut stdout = std::io::stdout();
     let mut remaining = total_duration;
-    print_remaining(&mut stdout, remaining);
+    print_remaining(remaining);
     let mut interval = tokio::time::interval(interval_duration);
     loop {
         interval.tick().await;
+        print_remaining(remaining);
         remaining = if let Some(remaining) = remaining.checked_sub(interval_duration) {
             remaining
         } else {
             Duration::from_millis(0)
         };
-        print_remaining(&mut stdout, remaining);
     }
 }
 
@@ -103,4 +103,6 @@ async fn main() {
         _ = print_intervals(duration, interval) => {}
         _ = tokio::time::delay_for(duration) => {}
     }
+    print_remaining(Duration::from_secs(0));
+    println!("");
 }
