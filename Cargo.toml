@@ -4,6 +4,7 @@ description = "Minimal countdown timer, similar to the sleep command, but consta
 version = "0.1.0"
 authors = ["Stephen Sherratt <stephen@sherra.tt>"]
 edition = "2018"
+license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/stevebob/sand"
 repository = "https://github.com/stevebob/sand"
