@@ -197,7 +197,7 @@ checksum = "1132f845907680735a84409c3bebc64d1364a5683ffbce899550cd09d5eaefc1"
 
 [[package]]
 name = "sand"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "chrono",
  "parse_duration",
