@@ -123,6 +123,16 @@ async fn print_intervals(total_duration: Duration, interval_duration: Duration) 
 async fn main() {
     print!("{}[8", (27u8 as char));
     let Args { duration, interval } = Args::arg().with_help_default().parse_env_or_exit();
+    const MIN_INTERVAL: Duration = Duration::from_millis(1);
+    let interval = if interval < MIN_INTERVAL {
+        eprintln!(
+            "Specified interval ({:?}) too low. Using {:?} instead.",
+            MIN_INTERVAL, MIN_INTERVAL
+        );
+        MIN_INTERVAL
+    } else {
+        interval
+    };
     tokio::select! {
         _ = print_intervals(duration, interval) => {}
         _ = tokio::time::delay_for(duration) => {}
