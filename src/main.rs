@@ -90,13 +90,13 @@ impl Printer {
             }
         }
         write!(self.buf, "s").unwrap();
-        print!("\r{}", self.buf);
         let len = self.buf.len();
         if let Some(pad) = self.prev_line.checked_sub(len) {
             for _ in 0..pad {
-                print!(" ");
+                self.buf.push(' ');
             }
         }
+        print!("\r{}", self.buf);
         self.prev_line = len;
         use std::io::Write as IoWrite;
         std::io::stdout().flush().unwrap();
