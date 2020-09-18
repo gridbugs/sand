@@ -11,6 +11,6 @@ repository = "https://github.com/stevebob/sand"
 
 [dependencies]
 tokio = { version = "0.2", features = ["macros", "time"] }
-simon = "0.3"
+meap = "0.1"
 parse_duration = "2.1"
 chrono = "0.4"

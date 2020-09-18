@@ -1,4 +1,3 @@
-use simon::Arg;
 use std::str::FromStr;
 use std::time::Duration;
 
@@ -12,25 +11,36 @@ impl FromStr for ParsableDuration {
     }
 }
 
+impl From<ParsableDuration> for Duration {
+    fn from(ParsableDuration(duration): ParsableDuration) -> Self {
+        duration
+    }
+}
+
 struct Args {
     duration: Duration,
     interval: Duration,
 }
 
 impl Args {
-    fn arg() -> impl Arg<Item = Self> {
-        simon::args_map! {
+    fn parse() -> Self {
+        (meap::args_map! {
             let {
-                duration = simon::free::<ParsableDuration>().vec_singleton();
-                interval = simon::opt::<ParsableDuration>("i", "interval", "interval to update display (default 1s)", "DURATION")
-                    .with_default(ParsableDuration(Duration::from_secs(1)));
+                duration = pos_req_via::<ParsableDuration, Duration>("PERIOD")
+                    .desc("how long to wait");
+                interval = opt_opt_via::<ParsableDuration, Duration, _>("DURATION", 'i')
+                    .name("interval")
+                    .with_default_parse("1s")
+                    .desc("how frequently to update the display");
             } in {
                 Self {
-                    duration: duration.0,
-                    interval: interval.0,
+                    duration: duration,
+                    interval: interval,
                 }
             }
-        }
+        })
+        .with_help_default()
+        .parse_env_or_exit()
     }
 }
 
@@ -121,8 +131,8 @@ async fn print_intervals(total_duration: Duration, interval_duration: Duration) 
 
 #[tokio::main]
 async fn main() {
+    let Args { duration, interval } = Args::parse();
     print!("{}[8", (27u8 as char));
-    let Args { duration, interval } = Args::arg().with_help_default().parse_env_or_exit();
     const MIN_INTERVAL: Duration = Duration::from_millis(1);
     let interval = if interval < MIN_INTERVAL {
         eprintln!(
