@@ -46,9 +46,9 @@ checksum = "f2f96b10ec2560088a8e76961b00d47107b3a625fecb76dedb29ee7ccbf98235"
 
 [[package]]
 name = "meap"
-version = "0.1.4"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5aa77acb9c1dd8fb26e6f5b07998b65e115a8599d774e8a5971c99824ced6d06"
+checksum = "116807a384577df3927a3ef69e60b41612477db216b08cbaa27c49c5ab4d80d7"
 
 [[package]]
 name = "memchr"

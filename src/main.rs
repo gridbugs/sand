@@ -24,7 +24,7 @@ struct Args {
 
 impl Args {
     fn parse() -> Self {
-        (meap::args_map! {
+        (meap::let_map! {
             let {
                 duration = pos_req_via::<ParsableDuration, Duration>("PERIOD")
                     .desc("how long to wait");
