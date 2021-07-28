@@ -6,8 +6,8 @@ authors = ["Stephen Sherratt <stephen@sherra.tt>"]
 edition = "2018"
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/stevebob/sand"
-repository = "https://github.com/stevebob/sand"
+homepage = "https://github.com/gridbugs/sand"
+repository = "https://github.com/gridbugs/sand"
 
 [dependencies]
 tokio = { version = "0.2", features = ["macros", "time"] }
