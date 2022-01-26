@@ -10,7 +10,7 @@ homepage = "https://github.com/gridbugs/sand"
 repository = "https://github.com/gridbugs/sand"
 
 [dependencies]
-tokio = { version = "0.2", features = ["macros", "time"] }
-meap = "0.4"
+tokio = { version = "1.15", features = ["macros", "time", "rt-multi-thread"] }
+meap = "0.5"
 parse_duration = "2.1"
 chrono = "0.4"

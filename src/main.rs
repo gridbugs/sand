@@ -145,7 +145,7 @@ async fn main() {
     };
     tokio::select! {
         _ = print_intervals(duration, interval) => {}
-        _ = tokio::time::delay_for(duration) => {}
+        _ = tokio::time::sleep(duration) => {}
     }
     print!("\r");
 }
